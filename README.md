@@ -37,25 +37,23 @@ Create 2 PostalWorkers and 2 Chefs, log them and test all their methods
 
 Bank Accounts take it a step further
 
-|**BankAccount class**:                                                 |
-|-----------------------------------------------------------------------|
-|Derived From	|Properties	                        |Methods            |
-|---------------|-----------------------------------|-------------------|
-|n/a	        |    ownerName, balance, acctNum    | deposit, withdraw |
-|               | (generated in constructor         |                   |
-|               | - not passed in)	                |                   |
+|**BankAccount class**:               |
+|------------------------------------ |
+| Derived From	| Properties |Methods |
+|---------------|------------- |------- |
+| n/a | ownerName, balance, acctNum | deposit, withdraw |
+| | (generated in constructor | |
+| | - not passed in) | |
 
-|**CheckingAccount class:**                             |
+| **CheckingAccount class:**                             |
 |-------------------------------------------------------|
-|Derived From	|Properties	        |Additional Methods |
-|---------------|-------------------|-------------------|
-|BankAccount    |    overdraftEnabled  | Override withdraw to |
-|               |                    | implement overdraft feature |
+| Derived From	| Properties | Additional Methods |
+| BankAccount | overdraftEnabled  | Override withdraw to |
+| | | implement overdraft feature |
 
 
-|**SavingsAccount class:**                                                 |
-|-----------------------------------------------------------------------|
-|Derived From	|Properties	        |Methods            |
-|---------------|-------------------|-------------------|
-|BankAccount    |  none             | Override withdraw to |
-|               |                   | disallow withdrawals completely :)  |
+| **SavingsAccount class:** |
+|-------------------------- |
+| Derived From | Properties | Methods |
+| BankAccount |  none | Override withdraw to |
+| | | disallow withdrawals completely :)  |
