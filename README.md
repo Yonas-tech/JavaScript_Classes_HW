@@ -37,8 +37,8 @@ Create 2 PostalWorkers and 2 Chefs, log them and test all their methods
 
 Bank Accounts take it a step further
 
-|**BankAccount class**: | |           |
-|------------------------------------ |
+|**BankAccount class**: | | |
+|----------|----------|--------------|
 | Derived From	| Properties |Methods |
 | n/a | ownerName, balance, acctNum | deposit, withdraw |
 | | (generated in constructor | |
@@ -51,7 +51,7 @@ Bank Accounts take it a step further
 | | | implement overdraft feature |
 
 
-| **SavingsAccount class:**    |
+| **SavingsAccount class:**   | | |
 |-------------|--------|----- |
 | Derived From | Properties | Methods |
 | BankAccount |  none | Override withdraw to |
