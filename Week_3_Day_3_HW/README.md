@@ -1,4 +1,4 @@
-# JavaScript_Classes_HW
+# Week 3 Day 3 HW
 ## Static Methods and Properties
 
 There are two JavaScript files in this folder: script.js and theExtra.JS 
