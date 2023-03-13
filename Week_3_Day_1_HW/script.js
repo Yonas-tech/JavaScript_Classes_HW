@@ -22,7 +22,7 @@ console.log('Question # 1')
 // TRIED TO EXPLORE ANOTHER WAY AND THIS WORKS TOO
 function maxOfTwoNumbers(x, y) { 
         return [x,y].filter((a)=> a>=(x+y)/2)[0]    // filters for the number greater than or equal to the average of the two numbers, 
-                                                    // and gets the 0 index, since filter returns an array and also incase the cases of x=y
+                                                    // and gets the 0 index, since filter returns an array and also for the cases of x=y
       }
 
 //Test cases: 
