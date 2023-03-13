@@ -17,18 +17,21 @@ console.log('Question # 1')
 // (completed above) Define a function, as a function declaration, maxOfTwoNumbers that takes two numbers as arguments and 
 // returns the largest of them. If they are the same, return that number. Use the if-else construct or a ternary expression - 
 // the Math.max method is not allowed.
-function maxOfTwoNumbers(x, y) {
-        if (x >= y) {
-          return x;
-        } else {
-          return y;
-        }
-      
-        // or more "elegantly" using the fantastic ternary expression!
-        // return  x >= y ? x : y;
+
+
+// TRIED TO EXPLORE ANOTHER WAY AND THIS WORKS TOO
+function maxOfTwoNumbers(x, y) { 
+        return [x,y].filter((a)=> a>=(x+y)/2)[0]    // filters for the number greater than or equal to the average of the two numbers, 
+                                                    // and gets the 0 index, since filter returns an array and also incase the cases of x=y
       }
 
-console.log(maxOfTwoNumbers(34,56))
+//Test cases: 
+console.log(maxOfTwoNumbers(34,56))         // 56
+console.log(maxOfTwoNumbers(34,34))         // 34
+console.log(maxOfTwoNumbers(100,-100))      // 100
+console.log(maxOfTwoNumbers(66,34))         // 66
+
+
 
 console.log('\nQuestion # 2')
 // Define a function, as a function expression, maxOfThree that takes three numbers as arguments and returns the largest of them. 
@@ -148,6 +151,9 @@ console.log(stringsLongerThan(['say', 'hello', 'in', 'the', 'morning'], 3))
 
 // Question # 1
 // 56
+// 34
+// 100
+// 66
 
 // Question # 2
 // 89
