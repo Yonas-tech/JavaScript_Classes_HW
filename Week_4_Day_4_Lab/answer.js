@@ -222,13 +222,4 @@ console.log(gordonRamsay)
 // Your commit message should read something like: 
 // "Dinner is served" Easy Mode Keep Going Save and Run Your Code
 
-// I. Variables & Datatypes
 
-// To answer these questions, you can add them in a multiline comment section inside of script.js
-
-// like this:
-// /*
-// 1. How do we assign a value to a variable? A. With the assignment operator
-// 2. How do we change the value of a...
-// ...
-// */
