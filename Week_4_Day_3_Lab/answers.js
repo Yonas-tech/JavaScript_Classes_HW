@@ -121,7 +121,9 @@ for(let i=0; i<=200; i++){
 // Hint: Think about the increment expression.
 // 🔴 The commit message should read: 
 // "Get Even answered"
-// Fizz Buzz
+
+
+console.log('\n// Fizz Buzz\n')
 
 // This is a classic problem that you should get really comfortable solving. If you've solved it before, try to make it more elegant and short.
 
@@ -129,6 +131,19 @@ for(let i=0; i<=200; i++){
 // If a number is divisible by 3 log "Fizz" instead of the number.
 // If a number is divisible by 5 log "Buzz" instead of the number.
 // If a number is divisible by 3 and 5 log "FizzBuzz" instead of the number.
+
+for(let i=1; i<=100; i++){
+    if(i%3==0 && i%5!= 0){
+        console.log(i+" Fizz")
+    }
+    else if(i%5==0 && i%3!=0){
+        console.log(i+" Buzz")
+    }
+    else if(i%3==0 && i%5==0){
+        console.log(i+" FizzBuzz")
+    }
+}
+
 // 🔴 The commit message should read: 
 // "Fizz Buzz answered"
 // Wild Wild Life
