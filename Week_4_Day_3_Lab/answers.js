@@ -133,14 +133,14 @@ console.log('\n// Fizz Buzz\n')
 // If a number is divisible by 3 and 5 log "FizzBuzz" instead of the number.
 
 for(let i=1; i<=100; i++){
-    if(i%3==0 && i%5!= 0){
+    if(i%3==0 && i%5==0){
+        console.log(i+" FizzBuzz")
+    }
+    else if(i%3==0){
         console.log(i+" Fizz")
     }
-    else if(i%5==0 && i%3!=0){
+    else if(i%5==0){
         console.log(i+" Buzz")
-    }
-    else if(i%3==0 && i%5==0){
-        console.log(i+" FizzBuzz")
     }
 }
 
@@ -178,14 +178,22 @@ console.log(wolfy)
 
 
 
-// Yell at the Ninja Turtles
+console.log('\n// Yell at the Ninja Turtles\n')
 
 // Create an array with the members of the ninja turtles (Donatello, Leonardo, Raphael, Michaelangelo)
+let ninjaArray = ['Donatello', 'Leonardo', 'Raphael', 'Michaelangelo']
 // Use a for of loop (not a typo - try it out! Try a for of loop) to call toUpperCase() on each of them and print out the result.
+for(ninja of ninjaArray) console.log(ninja.toUpperCase())
 // As a developer, you'll be a lifelong learner and constantly encountering new things. We'll give you little stretches like this to get you used to looking at documentation and figuring some things out on your own. You've got this!
+
+
 
 // 🔴 The commit message should read: 
 // "Yell at the Ninja Turtles answered"
+
+
+
+
 // Methods, Revisited
 
 // Here is a list of favMovies:
