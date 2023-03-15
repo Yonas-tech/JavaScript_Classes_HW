@@ -144,23 +144,40 @@ for(let i=1; i<=100; i++){
     }
 }
 
+
 // 🔴 The commit message should read: 
 // "Fizz Buzz answered"
-// Wild Wild Life
 
-// Use the following arrays to answer the questions below (name,species ,age, hometown): You should be modifying the elements by accessing them. It is up to you which methods to use.
 
-// const wolfy = ["Wolfy", "wolf", 16, "Yukon Territory"]
-// const sharky = ["Sharky", "shark", 20, "Left Coast"]
-// const plantee = ["Plantee", "plant",  5000 , "Mordor"]
-// const porgee = ["Porgee", "Porg", 186, "Ahch-To"]
-// const dart = ["D'Art" , "Demogorgan Dog", 2, "Upside Down"]
+
+console.log('\n// Wild Wild Life\n')
+
+// Use the following arrays to answer the questions below (name,species ,age, hometown): 
+// You should be modifying the elements by accessing them. It is up to you which methods to use.
+
+const wolfy = ["Wolfy", "wolf", 16, "Yukon Territory"]
+const sharky = ["Sharky", "shark", 20, "Left Coast"]
+const plantee = ["Plantee", "plant",  5000 , "Mordor"]
+const porgee = ["Porgee", "Porg", 186, "Ahch-To"]
+const dart = ["D'Art" , "Demogorgan Dog", 2, "Upside Down"]
+
 // Plantee just had her birthday; change Plantee's array to reflect her being a year older.
+plantee[2] ++
+console.log(plantee)
 // Change Wolfy's hometown from "Yukon Territory" to "Gotham City".
+wolfy[wolfy.indexOf("Yukon Territory")] = "Gotham City";
 // Give D'Art a second hometown by adding "Hawkins"
+dart.push("Hawkins")
+console.log(dart)
 // Porgee decides that Wolfy can't be named "Wolfy" anymore. Remove "Wolfy" from the wolfy array and replace it with "Gameboy".
+wolfy.shift()
+wolfy.unshift("Gameboy")
+console.log(wolfy)
 // 🔴 The commit message should read: 
 // "Wild Wild Life answered"
+
+
+
 // Yell at the Ninja Turtles
 
 // Create an array with the members of the ninja turtles (Donatello, Leonardo, Raphael, Michaelangelo)
