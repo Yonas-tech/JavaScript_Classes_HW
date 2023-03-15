@@ -221,5 +221,3 @@ console.log(gordonRamsay)
 // 🔴 Hard Mode Save & Commit your work! 
 // Your commit message should read something like: 
 // "Dinner is served" Easy Mode Keep Going Save and Run Your Code
-
-
