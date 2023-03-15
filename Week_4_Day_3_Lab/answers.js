@@ -216,6 +216,7 @@ favMovies.shift() // "Guardians o fhte Glaxy", the first item, got kicked out
 favMovies.unshift("Home Alone I") // --> "Home Alone I" got added at the biginning 
 // splice "Django Unchained" and add "Avatar" (try finding the index of "Django Unchained", instead of counting it yourself) Thought question: did this permanently alter our array?
 favMovies.splice(favMovies.indexOf("Django Unchained"),1, "Avatar")  // --> Done
+
 // slice the last half of the array (challenge yourself and try to programatically determine the middle of the array rather than counting it and hard coding it) - Thought question: did this permanently alter our array?
 console.log(favMovies.length)
 // store the value of your slice in a variable, console.log it - Thought question: what is going on here?
@@ -310,13 +311,23 @@ console.log('\n// Find the Median\n')
 const nums = [14,11,16,15,13,16,15,17,19,11,12,14,19,11,15,17,11,18,12,17,12,71,18,15,12];
 // Expected output:
 // => 15
+console.log('length: ' + nums.length)
+console.log('length/2: ' + nums.length/2)
+
+// sort the array first:
 nums.sort()
-let medInd = Math.floor(nums.length/2)
-console.log(nums[medInd])
+//finding the number of items in the array
+let length = nums.length
+if(nums.length % 2 == 1){ // length: odd
+    console.log(`Median: ${nums[(length+1)/2]}`)
+}
+else{ // length: even
+    console.log(`Median: ${ (nums[length/2]+ nums[length/2 +1]) / 2}`)
+}
+
 
 // 🔴 The commit message should read: 
 // "Find the Median answered"
-
 
 
 console.log('\n// Hungry for More?\n')
@@ -333,55 +344,63 @@ function fib(n) {
     // for n > 1
     return fib(n-1) + fib(n-2)
 }
-
 console.log(fib(8))
 
 // Checkerboard (morning lab)
+
 
 // TwoDArray (afternoon lab)
 
 // Finish all 3 Lab Questions
 
-// Return of the Closets
+console.log('\n// Return of the Closets\n')
 
 // Below, we've given you examples of Kristyn and Thom's closets modeled as data in JavaScript. Use this data to answer the following questions.
 
-// const kristynsCloset = [
-//   "left shoe",
-//   "cowboy boots",
-//   "right sock",
-//   "Per Scholas hoodie",
-//   "green pants",
-//   "yellow knit hat",
-//   "marshmallow peeps"
-// ];
+const kristynsCloset = [
+  "left shoe",
+  "cowboy boots",
+  "right sock",
+  "Per Scholas hoodie",
+  "green pants",
+  "yellow knit hat",
+  "marshmallow peeps"
+];
 
-// // Thom's closet is more complicated. Check out this nested data structure!!
-// const thomsCloset = [
-//   [
-//     // These are Thom's shirts
-//     "grey button-up",
-//     "dark grey button-up",
-//     "light blue button-up",
-//     "blue button-up",
-//   ],[
-//     // These are Thom's pants
-//     "grey jeans",
-//     "jeans",
-//     "PJs"
-//   ],[
-//     // Thom's accessories
-//     "wool mittens",
-//     "wool scarf",
-//     "raybans"
-//   ]
-// ];
-// Alien Attire
+// Thom's closet is more complicated. Check out this nested data structure!!
+const thomsCloset = [
+  [
+    // These are Thom's shirts
+    "grey button-up",
+    "dark grey button-up",
+    "light blue button-up",
+    "blue button-up",
+  ],[
+    // These are Thom's pants
+    "grey jeans",
+    "jeans",
+    "PJs"
+  ],[
+    // Thom's accessories
+    "wool mittens",
+    "wool scarf",
+    "raybans"
+  ]
+];
 
-// Kristyn's left shoe has traveled through time and space and turned up in Thom's accessories drawer! Remove Kristyn's shoe from the array and save it to the variable kristynsShoe. Use that variable to add Kristyn's lost shoe to Thom's accessories array.
-// Dress Us Up
+console.log('\n// Alien Attire\n')
+
+// Kristyn's left shoe has traveled through time and space and turned up in Thom's accessories drawer! 
+// Remove Kristyn's shoe from the array and save it to the variable kristynsShoe. Use that variable to add Kristyn's lost shoe to Thom's accessories array.
+const kristynsShoe = kristynsCloset.splice(kristynsCloset.indexOf("left shoe"), 1)
+thomsCloset[2].push(kristynsShoe)
+console.log(kristynsCloset)
+console.log(thomsCloset)
+console.log('\n// Dress Us Up\n')
 
 // Modify your code to put together 3 separate outfits for Kristyn and Thom. Put the output in a sentence to tell us what we'll be wearing. Mix and match!
+
+
 // 🔴 The commit message should read: 
 // "Kristyn and Thom have their outfits ready for class - array practice"
 // Dirty Laundry
