@@ -186,53 +186,102 @@ let ninjaArray = ['Donatello', 'Leonardo', 'Raphael', 'Michaelangelo']
 for(ninja of ninjaArray) console.log(ninja.toUpperCase())
 // As a developer, you'll be a lifelong learner and constantly encountering new things. We'll give you little stretches like this to get you used to looking at documentation and figuring some things out on your own. You've got this!
 
-
-
 // 🔴 The commit message should read: 
 // "Yell at the Ninja Turtles answered"
 
 
-
-
-// Methods, Revisited
+console.log('\n// Methods, Revisited\n')
 
 // Here is a list of favMovies:
 
-// const favMovies = ['Jaws', 'The Fellowship of the Ring', 'Howl\'s Moving Castle', 'Django Unchained', 'Cloud Atlas', 'The Usual Suspects', 'Toy Story', 'Conan the Barbarian', 'Titanic', 'Harry Potter', 'Fried Green Tomatoes', 'Volver', 'Oculus', 'Seven', 'Black Panther', 'Harry Potter', 'Imitation of Life', 'Snatch', 'Fast and Furious'];
+const favMovies = ['Jaws', 'The Fellowship of the Ring', 'Howl\'s Moving Castle', 'Django Unchained', 'Cloud Atlas', 'The Usual Suspects', 'Toy Story', 'Conan the Barbarian', 'Titanic', 'Harry Potter', 'Fried Green Tomatoes', 'Volver', 'Oculus', 'Seven', 'Black Panther', 'Harry Potter', 'Imitation of Life', 'Snatch', 'Fast and Furious'];
 // Console log: the index of Titanic
+console.log(favMovies.indexOf('Titanic'))
 // Do the following and console.log the final results (I have included some thought questions, you don't have to write out an answer for those marked as such):
 // Note: if you have to add to the array, feel free to add any movie you'd like
 
-// use the .sort method Thought question: what did this do to the array? Did it permanently alter it?
+// use the .sort method Thought question: what did this do to the array? Did it permanently alter it? 
+// --> yes, it sorted the movie titles
+favMovies.sort()
+console.log(favMovies)
 // Use the method pop
+favMovies.pop()   // 'Volver', last one on the sorted array, got kicked out
 // push "Guardians of the Galaxy"
+favMovies.push("Guardians of the Galaxy")  // --> this title added at the end of the sorted array
 // Reverse the array
+favMovies.reverse() // --> changed the array to descending  
 // Use the shift method
+favMovies.shift() // "Guardians o fhte Glaxy", the first item, got kicked out
 // unshift - what does it return?
+favMovies.unshift("Home Alone I") // --> "Home Alone I" got added at the biginning 
 // splice "Django Unchained" and add "Avatar" (try finding the index of "Django Unchained", instead of counting it yourself) Thought question: did this permanently alter our array?
+favMovies.splice(favMovies.indexOf("Django Unchained"),1, "Avatar")  // --> Done
 // slice the last half of the array (challenge yourself and try to programatically determine the middle of the array rather than counting it and hard coding it) - Thought question: did this permanently alter our array?
+console.log(favMovies.length)
 // store the value of your slice in a variable, console.log it - Thought question: what is going on here?
+let sliced = favMovies.slice(Math.ceil(favMovies.length/2))
+console.log(sliced)
+// --> sliced = copies the last half of favMovies, but faveMovies does not change
 // console.log your final results
-// After running the above tasks, console.log the index of "Fast and Furious" -We removed it from the array, what value do we get when we look for the index of something that is not in the array?
+console.log(favMovies)
+
+// After running the above tasks, console.log the index of "Fast and Furious" -We removed it from the array, 
+// what value do we get when we look for the index of something that is not in the array? --> -1
+console.log(`Index of "Fast and Furious": ${favMovies.indexOf("Fast and Furious")}`) //--> 14
+
 // Thought question: that we declared the variable favMovies with const, and yet, we were allowed to change the array. Weird? Should we have used let?
+// --> no we should not change it from const to let. while we can manipulate the array elements, 
+//     const prevents us from declaring or assigning new values directly to favMovies now, i.e. we can't do this now: let favMovies = [....]; or let favMovies; or favMovies = 5
 
 // 🔴 The commit message should read: 
 // "Methods Revisited answered"
-// Where is Waldo
+
+
+console.log('\n// Where is Waldo\n')
 
 // With the following multi-dimensional array
-// const whereIsWaldo = [["Timmy", "Frank"], "Eggbert",
-//                     ["Lucinda", "Jacc", "Neff", "Snoop"],
-//                     ["Petunia", ["Baked Goods", "Waldo"]]];
+const whereIsWaldo = [["Timmy", "Frank"], "Eggbert",
+                    ["Lucinda", "Jacc", "Neff", "Snoop"],
+                    ["Petunia", ["Baked Goods", "Waldo"]]];
 // Remove Eggbert (hint look at the slice/splice method(s))
+let idx = whereIsWaldo.indexOf("Eggbert")
+whereIsWaldo.splice(idx,1)
+
 // Change "Neff" to "No One"
+idx = whereIsWaldo[1].indexOf("Neff")
+whereIsWaldo[1].splice(idx,1,"No One")
+console.log(whereIsWaldo)
+
+
+// #### below is to modify finding an item for array of arrays: will work on it to improve
+// function findIndexOf(array, item){
+//     if(array.indexOf(item)!=-1){
+//         return array.indexOf(item);
+//     }
+//     let k=0;
+//     for(a of array){
+//         console.log("now: " + a)
+//         if(a.indexOf(item) != -1){
+//             return a.indexOf(`${k}, ${item}`)
+//         }
+//         k++;
+//     }
+//     return -1;
+// }
+// console.log(findIndexOf(whereIsWaldo, "No One"))
+
+
 // Access and console.log "Waldo"
+console.log(whereIsWaldo[2][1][1])
 // 🔴 The commit message should read: 
 // "Where is Waldo answered"
-// Excited Kitten
 
-// Write code that logs "Love me, pet me! HSSSSSS!" 20 times.
-// For every even number in your loop, log "...human...why you taking pictures of me?...", "...the catnip made me do it...", or "...why does the red dot always get away..." at random.
+
+
+console.log(`\n// Excited Kitten\n`)
+
+// 1. Write code that logs "Love me, pet me! HSSSSSS!" 20 times.
+// 2. For every even number in your loop, log "...human...why you taking pictures of me?...", "...the catnip made me do it...", or "...why does the red dot always get away..." at random.
 // Hint 1
 // Hint 2
 // Hint 3
@@ -240,24 +289,52 @@ for(ninja of ninjaArray) console.log(ninja.toUpperCase())
 // Hint 5
 // Hint 6
 // Image of cat with funny quote about dot
-
+let carPhrases = ["...human...why you taking pictures of me?...", "...the catnip made me do it...", "...why does the red dot always get away..." ]
+let len = carPhrases.length 
+for (let i=1; i<20; i++){
+    console.log(i + "\nLove me, pet me! HSSSSSS!")
+    let randomInd;
+    if(i%2 == 0){
+        randomInd = Math.floor(Math.random()*(len))  // get a random number-->[0,1) , multiply it with the len--->[0,len) with decimals, then math floor gives round it down
+        console.log(carPhrases[randomInd])
+    }
+}
 // 🔴 The commit message should read: 
 // "Excited Kittens answered"
-// Find the Median
+
+
+console.log('\n// Find the Median\n')
 
 // Find the median number in the following nums array, then console.log that number.
 // hint if you check the length of the array / 2, you might get not get a whole number. In which case, look into Math.floor( // something )
-// const nums = [14,11,16,15,13,16,15,17,19,11,12,14,19,11,15,17,11,18,12,17,12,71,18,15,12];
-
+const nums = [14,11,16,15,13,16,15,17,19,11,12,14,19,11,15,17,11,18,12,17,12,71,18,15,12];
 // Expected output:
 // => 15
+nums.sort()
+let medInd = Math.floor(nums.length/2)
+console.log(nums[medInd])
+
 // 🔴 The commit message should read: 
 // "Find the Median answered"
-// Hungry for More?
+
+
+
+console.log('\n// Hungry for More?\n')
 
 // Choose one that you didn't get to solve in lab
 
-// Fibonnacci (morning lab)
+console.log("// Fibonnacci (morning lab)\n")
+// Fibonacci sequence is a sequence in which each number is the sum of the two preceding ones
+
+function fib(n) {
+    //base condition for n=1 or n=0
+    if(n == 0 || n == 1) { return 1}
+    
+    // for n > 1
+    return fib(n-1) + fib(n-2)
+}
+
+console.log(fib(8))
 
 // Checkerboard (morning lab)
 
