@@ -44,7 +44,7 @@ class CheckingAccount extends BankAccount {
             if (this.balance < dollarAmount) {
                 console.log("No Enough Balance!")
                 console.log(`Current balance: ${super.moneyFormatter(this.balance)}`)
-                console.log(`Widrawal Request: ${super.moneyFormatter(dollarAmount)}\n`)
+                console.log(`Withdrawal Request: ${super.moneyFormatter(dollarAmount)}\n`)
             }
             else {
                 super.withdraw(dollarAmount)
@@ -97,4 +97,7 @@ saving1.withdraw(dollarAmount);
 dollarAmount = 77;
 saving1.deposit(dollarAmount);
 
+
+// console.log(CheckingAccount.prototype) // --> BankAccount {}
+console.log(BankAccount.prototype)
 
