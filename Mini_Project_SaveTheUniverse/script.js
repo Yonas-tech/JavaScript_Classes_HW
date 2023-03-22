@@ -1,10 +1,33 @@
 
 // Ship Class
+// the Enemy and Player ships share many properties and methods
+// but the Player ship has additional method (retreat)
 class Ship { 
     constructor(hull, firePower, accuracy){
             this.hull = hull;
             this.firePower = firePower;
             this.accuracy = accuracy;
+    }
+
+    attack(){
+        if(this.hull >0){
+            // ?? how do you attack
+        }
+        else{
+            // do I need else
+        }
+    }
+}
+
+
+class EnemyShip extends Ship{
+
+}
+
+class PlayerShip extends Ship{
+    retreat(){
+        // ends the game
+        // ? how do you do it?
     }
 }
 
@@ -21,26 +44,26 @@ class ShipFactory {
     createPlayerShip(){
         // check if the player ship is already created
         if (this.playerShip){
-            console.log('\nWARNING!  Player Ship Already exists.\n');
+            console.log('\nWARNING! Player Ship Already exists.\n');
             return;
         }
 
-        this.playerShip = new Ship(20, 5, 0.7);
+        this.playerShip = new PlayerShip(20, 5, 0.7);
     }
 
     // create enemy ships (default count = 6 )
     createEnemyShips(count=6){
         // check if the enemy ships are not already created
-        // if(this.enemyShips != null){
-        //     console.log("\nWARNING! Enemy ships already created. \n")
-        //     return;
-        // }
+        if(this.enemyShips.length > 0){
+            console.log("\nWARNING! Enemy ships already created. \n")
+            return;
+        }
 
         for (let i=1; i<=count; i++){
             let hull = this.randomValGenerator(3, 6);
             let firePower = this.randomValGenerator(2, 4) ;
             let accuracy = this.randomValGenerator(0.6, 0.8, false) ;
-            this.enemyShips.push(new Ship(hull, firePower, accuracy))
+            this.enemyShips.push(new EnemyShip(hull, firePower, accuracy))
         }
     }
 
@@ -68,6 +91,12 @@ const universalShipFactory = new ShipFactory();
 // generate the player ship
 universalShipFactory.createPlayerShip();
 //generate enemy ships (default count=6);
+universalShipFactory.createEnemyShips();
+
+console.log(universalShipFactory)
+
+// testing if factory re-creates already created ships
+universalShipFactory.createPlayerShip();
 universalShipFactory.createEnemyShips();
 
 console.log(universalShipFactory)
