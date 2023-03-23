@@ -110,8 +110,8 @@ universalShipFactory.createPlayerShip();
 universalShipFactory.createEnemyShips();
 
 // console.log(universalShipFactory)
-let player = universalShipFactory.enemyShips;
-let enemies = universalShipFactory.playerShip;
+let player = universalShipFactory.playerShip;
+let enemies = universalShipFactory.enemyShips;
 console.log(player)
 console.log(enemies)
 
@@ -122,8 +122,20 @@ console.log(enemies)
 
 // console.log(universalShipFactory)
 
-// ////////////////////////////////////////
+//////////////////////////////////////////
 
+function deployEnemyShip () {
+    let enemyShipsCount = enemies.length;
+    console.log(enemyShipsCount)
+    if(enemyShipsCount >1){
+        return Math.floor(Math.random()*enemyShipsCount);
+    }
+    else if(enemyShipsCount = 1){
+        return 1;
+    }
+}
+
+// console.log(deployEnemyShip())
 
 
 
