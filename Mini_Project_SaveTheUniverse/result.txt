@@ -1,0 +1,102 @@
+## an example code result: the player looses
+
+6
+EnemyShip 3: have been hit!
+EnemyShip 3: health status: hull=-2
+EnemyShip 3 is destroied.
+enemy ship counts: 5
+5
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=16
+EnemyShip 4: have been hit!
+EnemyShip 4: health status: hull=0
+EnemyShip 4 is destroied.
+enemy ship counts: 4
+4
+EnemyShip 1: have been hit!
+EnemyShip 1: health status: hull=-1
+EnemyShip 1 is destroied.
+enemy ship counts: 3
+3
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=14
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=12
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=10
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=8
+EnemyShip 5: have been hit!
+EnemyShip 5: health status: hull=1
+USS Ship: have been hit!
+USS Ship: health status: hull=6
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=4
+EnemyShip 5: have been hit!
+EnemyShip 5: health status: hull=-4
+EnemyShip 5 is destroied.
+enemy ship counts: 2
+2
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=2
+EnemyShip 6: have been hit!
+EnemyShip 6: health status: hull=-1
+EnemyShip 6 is destroied.
+enemy ship counts: 1
+1
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=-1
+player looses
+
+
+
+## an example code result: enemy looses
+
+6
+EnemyShip 5: have been hit!
+EnemyShip 5: health status: hull=1
+USS Ship: have been hit!
+USS Ship: health status: hull=16
+EnemyShip 5: have been hit!
+EnemyShip 5: health status: hull=-4
+EnemyShip 5 is destroied.
+enemy ship counts: 5
+5
+EnemyShip 1: have been hit!
+EnemyShip 1: health status: hull=0
+EnemyShip 1 is destroied.
+enemy ship counts: 4
+4
+EnemyShip 2: have been hit!
+EnemyShip 2: health status: hull=-1
+EnemyShip 2 is destroied.
+enemy ship counts: 3
+3
+USS Ship: missed the shot.
+USS Ship: have been hit!
+USS Ship: health status: hull=12
+EnemyShip 6: have been hit!
+EnemyShip 6: health status: hull=-2
+EnemyShip 6 is destroied.
+enemy ship counts: 2
+2
+EnemyShip 4: have been hit!
+EnemyShip 4: health status: hull=-2
+EnemyShip 4 is destroied.
+enemy ship counts: 1
+1
+USS Ship: missed the shot.
+EnemyShip 3: missed the shot.
+EnemyShip 3: have been hit!
+EnemyShip 3: health status: hull=0
+EnemyShip 3 is destroied.
+enemy ship counts: 0
+enemy looses

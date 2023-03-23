@@ -11,14 +11,17 @@ class Ship {
 
     attack(ship){ // 'ship' is the ship being attacked and 'this.ship' is the one attacking
         if(this.hull >0){
-            // ?? how do you attack
+            //
             if (Math.random() < this.accuracy) {
                 ship.hull -= this.firePower;    //  ?? firePower decreases the hull
-                console.log(ship.name +' have been hit!');
-                console.log(ship.name + ' health status: hull='+ship.hull)
+                console.log(ship.name +': have been hit!');
+                console.log(ship.name + ': health status: hull='+ship.hull)
+
+                return 1; //hit
             }
             else{
-                console.log(this.name + ' missed the shot.')
+                console.log(this.name + ': missed the shot.')
+                return 0; //miss
             }
         }
         else{
@@ -112,8 +115,8 @@ universalShipFactory.createEnemyShips();
 // console.log(universalShipFactory)
 let player = universalShipFactory.playerShip;
 let enemies = universalShipFactory.enemyShips;
-console.log(player)
-console.log(enemies)
+// console.log(player)
+// console.log(enemies)
 
 
 // // testing if factory re-creates already created ships
@@ -130,12 +133,71 @@ function deployEnemyShip () {
     if(enemyShipsCount >1){
         return Math.floor(Math.random()*enemyShipsCount);
     }
-    else if(enemyShipsCount = 1){
-        return 1;
+    else if(enemyShipsCount == 1){
+        return 0;
     }
 }
 
+function gameOver(result){  // this is simple for now
+    console.log(result)
+}
+
+
+
 // console.log(deployEnemyShip())
 
+let currentEnemyShip;
+let currentEnemyShipIndex;
 
+function battleField() {
+    //condition: to check if there is an already deployed enemy chip
+    if(currentEnemyShip == null && enemies.length > 0){
+        currentEnemyShipIndex = deployEnemyShip();
+        currentEnemyShip = enemies[currentEnemyShipIndex];
+    }
+    // console.log('currentEnemyShip: ' + JSON.stringify(currentEnemyShip))
 
+    // PlayerShip attacks:
+    let playerShoot = player.attack(currentEnemyShip)
+    // console.log('currentEnemyShip: ' + JSON.stringify(currentEnemyShip))
+    // console.log('playerShoot: '+ playerShoot)
+
+    // do the option to retreat() here using 'playerShoot' result: 0 or 1 (miss or hit)
+
+    //if enemy ship survives, it shoots
+    if(currentEnemyShip.hull > 0){
+        // console.log('playerShipHealthStatus: ' + JSON.stringify(player.hull))
+        currentEnemyShip.attack(player)
+        // console.log('playerShipHealthStatus: ' + JSON.stringify(player.hull))
+
+        // if player survives, it goes back to the battle filed
+        if(player.hull > 0){
+            battleField();
+        }
+        // otherwise, player looses
+        else{
+            gameOver("player looses")
+        }
+    }
+    // if the enemy ship does not survive the damage
+    else{
+        // remove that ship from enemy ships 
+        enemies.splice(currentEnemyShipIndex, 1)
+        console.log(currentEnemyShip.name + ' is destroied.')
+        console.log('enemy ship counts: '+ enemies.length)
+
+        // check if the enemy still have ships
+        if(enemies.length > 0){
+            // reset the currentEnemyShip variable
+            currentEnemyShip = null;
+            // go back to the bottlefield
+            battleField()
+        }
+        // all enemy ships have been destroied 
+        else{
+            gameOver('enemy looses')
+        }
+    }
+} // battlefield
+
+battleField()
