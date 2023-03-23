@@ -9,9 +9,16 @@ class Ship {
             this.accuracy = accuracy;
     }
 
-    attack(){
+    attack(ship){ // 'ship' is the ship being attacked and 'this.ship' is the one attacking
         if(this.hull >0){
             // ?? how do you attack
+            if (Math.random() < this.accuracy) {
+                ship.hull -= this.firePower;    //  ??
+                console.log(ship.name +' have been hit!');
+            }
+            else{
+                console.log(this.name + ' missed the shot')
+            }
         }
         else{
             // do I need else
@@ -21,10 +28,17 @@ class Ship {
 
 
 class EnemyShip extends Ship{
-
+    constructor(hull, firePower, accuracy, name){
+        super(hull, firePower, accuracy);
+        this.name = name;
+    }
 }
 
 class PlayerShip extends Ship{
+    constructor(hull, firePower, accuracy){
+        super(hull, firePower, accuracy);
+        this.name = "USS Ship"
+    }
     retreat(){
         // ends the game
         // ? how do you do it?
@@ -63,7 +77,8 @@ class ShipFactory {
             let hull = this.randomValGenerator(3, 6);
             let firePower = this.randomValGenerator(2, 4) ;
             let accuracy = this.randomValGenerator(0.6, 0.8, false) ;
-            this.enemyShips.push(new EnemyShip(hull, firePower, accuracy))
+            let name = "EnemyShip "+(i)
+            this.enemyShips.push(new EnemyShip(hull, firePower, accuracy, name))
         }
     }
 
@@ -93,12 +108,21 @@ universalShipFactory.createPlayerShip();
 //generate enemy ships (default count=6);
 universalShipFactory.createEnemyShips();
 
-console.log(universalShipFactory)
+// console.log(universalShipFactory)
+let player = universalShipFactory.enemyShips;
+let enemies = universalShipFactory.playerShip;
+console.log(player)
+console.log(enemies)
 
-// testing if factory re-creates already created ships
-universalShipFactory.createPlayerShip();
-universalShipFactory.createEnemyShips();
 
-console.log(universalShipFactory)
+// // testing if factory re-creates already created ships
+// universalShipFactory.createPlayerShip();
+// universalShipFactory.createEnemyShips();
+
+// console.log(universalShipFactory)
+
+// ////////////////////////////////////////
+
+
 
 
