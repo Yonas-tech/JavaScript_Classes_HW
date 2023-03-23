@@ -13,11 +13,12 @@ class Ship {
         if(this.hull >0){
             // ?? how do you attack
             if (Math.random() < this.accuracy) {
-                ship.hull -= this.firePower;    //  ??
+                ship.hull -= this.firePower;    //  ?? firePower decreases the hull
                 console.log(ship.name +' have been hit!');
+                console.log(ship.name + ' health status: hull='+ship.hull)
             }
             else{
-                console.log(this.name + ' missed the shot')
+                console.log(this.name + ' missed the shot.')
             }
         }
         else{
