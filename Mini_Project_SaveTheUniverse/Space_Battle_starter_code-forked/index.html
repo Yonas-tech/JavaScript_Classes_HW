@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,43 +8,73 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script defer src="../script.js" charset="utf-8"></script>
 </head>
+
 <body>
     <div class="bodyContainer">
 
-        <div class="mainCharacterView left" >
-                <div class="nameBox">USS Schwarzenegger</div>
-                <div class="playerImage"></div>
-                <div class="playerStats">
+        <div class="mainCharacterView left">
+            <div class="nameBox">USS Schwarzenegger</div>
+            <div class="playerImage">
+            </div>
+            <div class="playerStats">
 
                 Hull : 15 <br>
                 FirePower : 5 <br>
                 Accuracy : .7 <br>
 
-z
+            </div>
 
-                </div>
+        </div>
 
+
+        <div class="start">
+            <!-- <button onclick="battleField()">START</button> -->
+            <!-- <dialog open>
+                <p>Are you ready to save the univers?</p>
+                <form method="dialog">
+                    <button onclick="battleField()">START</button>
+                </form>
+              </dialog> -->
+
+            <div class="liveReport">Game Live Report</div>
+
+            <div class="battleStatus">
+                <textarea id="log">
+                </textarea>
+            </div>
+
+            <div class="buttonsDiv">
+                <dialog open>
+                    <p>Are you ready to save the univers?</p>
+                    <form method="dialog">
+                        <button onclick="battleField()">START</button>
+                    </form>
+                </dialog>
+            </div>
         </div>
 
 
         <div class="mainCharacterView right">
-           
             <div class="nameBox">Enemy</div>
-            <div class="enemyImage"></div>
-                <div class="enemyStats">
-                    Hull : 6 <br>
-                    FirePower : 3 <br>
-                    Accuracy : .6 <br>
-    
-    
-                </div>
-            
+            <div class="enemyImage">
+                <!-- <img src="images/enemy.gif" alt=""> -->
+            </div>
+            <div class="enemyStats">
+                Hull : 6 <br>
+                FirePower : 3 <br>
+                Accuracy : .6 <br>
+
+
+            </div>
+
         </div>
 
 
-    <script src="app.js"></script>
+        <!-- <script src="app.js"></script> -->
 </body>
+
 </html>

@@ -1,7 +1,11 @@
-
 // Ship Class
 // the Enemy and Player ships share many properties and methods
 // but the Player ship has additional method (retreat)
+
+let outputText = ""
+let textareaEl = document.querySelector('textarea')
+
+
 class Ship {
     constructor(hull, firePower, accuracy) {
         this.hull = hull;
@@ -14,13 +18,14 @@ class Ship {
             //
             if (Math.random() < this.accuracy) {
                 ship.hull -= this.firePower;    //  ?? firePower decreases the hull
-                console.log(ship.name + ': have been hit!');
-                console.log(ship.name + ': health status: hull=' + ship.hull)
+
+                textareaEl.textContent+= '\n'+ ship.name + ': has been hit!';
+                textareaEl.textContent+= '\n'+ ship.name + ': health status: hull=' + ship.hull;
 
                 return 1; //hit
             }
             else {
-                console.log(this.name + ': missed the shot.')
+                textareaEl.textContent+= '\n'+ this.name + ': missed the shot.';
                 return 0; //miss
             }
         }
@@ -64,7 +69,7 @@ class ShipFactory {
     createPlayerShip() {
         // check if the player ship is already created
         if (this.playerShip) {
-            console.log('\nWARNING! Player Ship Already exists.\n');
+            textareaEl.textContent += '\nWARNING! Player Ship Already exists.\n';
             return;
         }
 
@@ -75,7 +80,7 @@ class ShipFactory {
     createEnemyShips(count = 6) {
         // check if the enemy ships are not already created
         if (this.enemyShips.length > 0) {
-            console.log("\nWARNING! Enemy ships already created. \n")
+            textareaEl.textContent+= "\nWARNING! Enemy ships already created. \n"
             return;
         }
 
@@ -141,12 +146,17 @@ function deployEnemyShip() {
 }
 
 function gameOver(result) {  // this is simple for now
-    console.log(`\n${result}\n`)
-    console.log(`Enemy status:`);
-    console.log(enemies)
-    console.log(`Player status:`);
+    textareaEl.textContent+= `\n${result}\n`;
+    textareaEl.textContent+= '\n'+`Enemy status:`;
+
+    console.log(enemies)   // will do with loop or conditional
+
+    textareaEl.textContent+= '\n'+`Player status:`;
     console.log(player)
+
     console.log()
+
+    window.alert('Game Over!')
 }
 
 
@@ -154,9 +164,10 @@ function gameOver(result) {  // this is simple for now
 // console.log(deployEnemyShip())
 
 let currentEnemyShip;
-let currentEnemyShipIndex;
+let currentEnemyShipIndex; // = null
 
 function battleField() {
+    textareaEl.textContent+= '\n'+'Enemy ships count: ' + enemies.length +'\n';
     //condition: to check if there is an already deployed enemy chip
     if (currentEnemyShip == null && enemies.length > 0) {
         currentEnemyShipIndex = deployEnemyShip();
@@ -168,8 +179,6 @@ function battleField() {
     let playerShoot = player.attack(currentEnemyShip)
     // console.log('currentEnemyShip: ' + JSON.stringify(currentEnemyShip))
     // console.log('playerShoot: '+ playerShoot)
-
-    // do the option to retreat() here using 'playerShoot' result: 0 or 1 (miss or hit)
 
     //if enemy ship survives, it shoots
     if (currentEnemyShip.hull > 0) {
@@ -183,20 +192,21 @@ function battleField() {
         }
         // otherwise, player looses
         else {
-            gameOver("player looses")
+            gameOver("Enemy Won :(")
         }
     }
     // if the enemy ship does not survive the damage
     else {
         // remove that ship from enemy ships 
         enemies.splice(currentEnemyShipIndex, 1)
-        console.log(currentEnemyShip.name + ' is destroied.')
-        console.log('enemy ship counts: ' + enemies.length)
+        textareaEl.textContent+= '\n'+currentEnemyShip.name + ' is destroyed.\n';
 
-        // player now has the option to retreat(deciding randomely for now: 0 = retreat, 1= no retreat)
-        let playerRetreat = universalShipFactory.randomValGenerator(0, 1);
-        // if retreat, the battle is disrupted, then call retreat()
-        if (playerRetreat == 0) {
+        // player now has the option to retreat
+        // if retreated, the battle is disrupted, then call retreat()
+        let retreatMsg = `Well done! ${currentEnemyShip.name} has been destroyed. \n
+                          Do you want to retreet?`
+        let retreated = confirm(retreatMsg);
+        if (retreated){
             player.retreat();
         }
         // else continue playing ...
@@ -208,14 +218,15 @@ function battleField() {
                 // go back to the bottlefield
                 battleField()
             }
-            // all enemy ships have been destroied 
+            // all Enemy ships have been destroyed 
             else {
-                gameOver('enemy looses')
+                textareaEl.textContent+= '\n'+'Enemy ships count: ' + enemies.length +'\n';
+                gameOver('USS Won :)')
             }
         }
     }
 } // battlefield
 
-battleField()
+// battleField()
 
 
