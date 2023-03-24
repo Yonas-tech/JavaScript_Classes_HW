@@ -1,0 +1,13 @@
+let textareaEl = document.querySelector('textarea');
+let startBtnEl = document.querySelector('.startBtn');
+let dialogEl = document.querySelector('dialog');
+let formEl = document.querySelector('form')
+let messagePEl = document.querySelector('.message')
+
+let secondBtnEl = document.createElement('button');
+
+dialogEl.addEventListener('click', handleClick);
+
+
+progressMassage
+newForm
