@@ -227,16 +227,10 @@ function gameOver(result) {  // this is simple for now
     textareaEl.textContent += JSON.stringify(player)
 
 
-    let retreatMsg = `GAME OVER! \n ${result}\n`;  //${currentEnemyShip.name} has been destroyed. \n`;
+    let retreatMsg = `GAME OVER! \n ${result}\n`; 
     askConfirmaiton(retreatMsg, null, 'Restart')
 
-    // console.log()
 }
-
-// console.log(deployEnemyShip())
-
-// let currentEnemyShip;
-// let currentEnemyShipIndex; // = null
 
 
 // #####################  START and RESTART
@@ -273,29 +267,11 @@ function handleClick(event) {
     }
 
     function battleField() {
-        // textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
-        //condition: to check if there is an already deployed enemy chip
-        if (currentEnemyShip == null && enemies.length > 0) {
-            // currentEnemyShipIndex = deployEnemyShip();
-            // currentEnemyShip = enemies[currentEnemyShipIndex];
-            // textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
-            // populatePlayers()
-        }
-
-
-
+        // //condition: to check if there is an already deployed enemy chip
 
         // PlayerShip attacks:
-
         let hitOrMiss = player.attack(currentEnemyShip);
         updateStats(hitOrMiss, player, currentEnemyShip);
-
-        if (hitOrMiss == 1) { //hit
-
-        }
-        else if (hitOrMiss == 0) { // miss
-
-        }
 
         //if enemy ship survives, it shoots
         if (currentEnemyShip.hull > 0) {
@@ -337,22 +313,12 @@ function handleClick(event) {
 
 
     function noRetreate() {
-        // if (enemies.length > 0) {
-            // reset the currentEnemyShip variable
-            // currentEnemyShip = null;
-            // go back to the bottlefield
             if (currentEnemyShip == null){
                 currentEnemyShipIndex = deployEnemyShip();
                 currentEnemyShip = enemies[currentEnemyShipIndex];
                 textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
             }
             battleField()
-        // }
-        // // all Enemy ships have been destroyed 
-        // else {
-
-        //     gameOver('USS Won :)')
-        // }
     } //noRetreate
 }
 // battleField()
