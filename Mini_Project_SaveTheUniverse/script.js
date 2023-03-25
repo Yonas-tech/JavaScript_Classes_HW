@@ -43,8 +43,8 @@ class PlayerShip extends Ship {
     }
     retreat() {
         // game over
-        window.alert('USS retreated!')
-        // ? how do you do it?
+
+        // window.alert('USS retreated! This ends the game.')
         gameOver('USS retreated and lost the Victory.\n Try next time .... ')
 
     }
@@ -106,15 +106,16 @@ function randomValGenerator(min, max, round = true) {
     return Math.round(val * 10) / 10;
 }
 
-// ##################### #####################   Instanciate a universal ship factory and produce the ships
-let universalShipFactory;
+// ##################### #####################   Instanciate a universal-ship factory, produce the ships, and deploy the first enemy ship
+
+// Global Variables 
 let player;
 let enemies
 let currentEnemyShip;
 let currentEnemyShipIndex;
 
 function populatePlayers() {
-    universalShipFactory = new ShipFactory();
+    const universalShipFactory = new ShipFactory();
     // generate the player ship
     universalShipFactory.createPlayerShip();
     //generate enemy ships (default count=6);
@@ -123,20 +124,30 @@ function populatePlayers() {
     player = universalShipFactory.playerShip;
     enemies = universalShipFactory.enemyShips;
 
-    textareaEl.textContent += "\nTotal Number Of Enemy Ships To Attack: " + enemies.length + "\n";
+    textareaEl.textContent = "\nTotal Number Of Enemy Ships To Attack: " + enemies.length + "\n";
+
+    // deploy the 1st enemy ship
     currentEnemyShipIndex = deployEnemyShip();
     currentEnemyShip = enemies[currentEnemyShipIndex];
-    textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
-}
 
+    textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed.`
+    textareaEl.textContent += `\n       Hull: ${currentEnemyShip.hull}`
+    textareaEl.textContent += `\n       FirPower: ${currentEnemyShip.firePower}`
+    textareaEl.textContent += `\n       Accuracy: ${currentEnemyShip.accuracy}`
+
+    updateStats(null, player, currentEnemyShip)
+
+}
 
 
 // ##################### Get some DOM elements
 
 let playerStats = document.querySelector('.playerStats')
 let enemyStats = document.querySelector('.enemyStats')
+// let textareaEl = document.querySelector('textarea');
+let textareaEl = document.querySelector('#log');
 
-let textareaEl = document.querySelector('textarea');
+
 let startBtnEl = document.querySelector('.startBtn');
 let dialogEl = document.querySelector('dialog');
 let formEl = document.querySelector('form')
@@ -190,6 +201,14 @@ function deployEnemyShip() {
 // #####################   updateStats()
 
 function updateStats(hitOrMiss, attacker, target) {
+
+    if(hitOrMiss == null){ //1st round stats update
+        const txtAttacker = " Hull :  " + attacker.hull + "<br>  FirePower :  " + attacker.firePower + "<br>    Accuracy :  " + attacker.accuracy;
+        const txtTarget = " Hull :  " + target.hull + "<br>  FirePower :  " + target.firePower + "<br>    Accuracy :  " + target.accuracy;
+        playerStats.innerHTML = txtAttacker;
+        enemyStats.innerHTML = attacker.name + "<br>" + txtTarget;
+
+    }
     if (hitOrMiss == 1) { //hit
         textareaEl.textContent += '\n' + target.name + ': has been hit!';
         textareaEl.textContent += '\n' + target.name + ': health status: hull=' + target.hull;
@@ -200,8 +219,7 @@ function updateStats(hitOrMiss, attacker, target) {
         const txtAttacker = " Hull :  " + attacker.hull + "<br>  FirePower :  " + attacker.firePower + "<br>    Accuracy :  " + attacker.accuracy;
         const txtTarget = " Hull :  " + target.hull + "<br>  FirePower :  " + target.firePower + "<br>    Accuracy :  " + target.accuracy;
 
-        if (attacker.constructor.name == 'PlayerShip') {
-
+        if (attacker.constructor.name == 'PlayerShip') { 
             playerStats.innerHTML = txtAttacker;
             enemyStats.innerHTML = target.name + "<br>" + txtTarget;
         }
@@ -213,7 +231,7 @@ function updateStats(hitOrMiss, attacker, target) {
     }
     else if (hitOrMiss == 0) { // miss
         textareaEl.textContent += '\n' + attacker.name + ': missed the shot.';
-        txt = ``
+        
     }
 }
 
@@ -225,9 +243,9 @@ function gameOver(result) {  // this is simple for now
     textareaEl.textContent += '\n' + `Number of enemy ships left: ${enemies.length}`;
     textareaEl.textContent += '\n' + `Player status:`;
     textareaEl.textContent += JSON.stringify(player)
+    textareaEl.scrollTop = textareaEl.scrollHeight;
 
-
-    let retreatMsg = `GAME OVER! \n ${result}\n`; 
+    let retreatMsg = `GAME OVER! \n ${result}\n`;
     askConfirmaiton(retreatMsg, null, 'Restart')
 
 }
@@ -251,7 +269,14 @@ function handleClick(event) {
 
     }
     else if (element == yesBtnEl) { //Retreat Button
-        player.retreat()
+        let text = 'Are you sure you want USS ship to retreat? This ends the battle.';
+        if (confirm(text) == true) {
+            player.retreat()
+        } else {
+            //text = "You canceled!";
+
+            noRetreate()
+        }
 
     }
     else if (element == noBtnEl) { // Attack Button  // same as contnue playing
@@ -292,33 +317,46 @@ function handleClick(event) {
         else {
             // remove that ship from enemy ships 
             enemies.splice(currentEnemyShipIndex, 1)
+
             textareaEl.textContent += '\n' + currentEnemyShip.name + ' is destroyed.\n';
-
+            textareaEl.textContent += '         -------------        '
             textareaEl.textContent += '\n' + 'Number of enemy ships left: ' + enemies.length + '\n';
+            textareaEl.scrollTop = textareaEl.scrollHeight;
 
-            let retreatMsg = `Well done! ${currentEnemyShip.name} has been destroyed. \n`;
+            let destroyedShip = currentEnemyShip;
             currentEnemyShip = null;
-            // player now has the option to retreat
-            if (enemies.length == 0) {
 
+            if (enemies.length == 0) {
                 gameOver('USS Won :)')
             }
-            else {
+            else { 
+
+                // deploy the next ship
+                currentEnemyShipIndex = deployEnemyShip();
+                currentEnemyShip = enemies[currentEnemyShipIndex];
+                textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
+                textareaEl.textContent += `\n       Hull: ${currentEnemyShip.hull}`
+                textareaEl.textContent += `\n       FirPower: ${currentEnemyShip.firePower}`
+                textareaEl.textContent += `\n       Accuracy: ${currentEnemyShip.accuracy}`
+
+                textareaEl.scrollTop = textareaEl.scrollHeight;
+
+                // player now has the option to retreat
+                let retreatMsg = `Well done! ${destroyedShip.name} has been destroyed. \n`;
                 askConfirmaiton(retreatMsg)
             }
+
 
         }
     } // battlefield
 
-
-
     function noRetreate() {
-            if (currentEnemyShip == null){
-                currentEnemyShipIndex = deployEnemyShip();
-                currentEnemyShip = enemies[currentEnemyShipIndex];
-                textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
-            }
-            battleField()
+        if (currentEnemyShip == null) {
+            currentEnemyShipIndex = deployEnemyShip();
+            currentEnemyShip = enemies[currentEnemyShipIndex];
+            textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
+        }
+        battleField()
     } //noRetreate
 }
 // battleField()

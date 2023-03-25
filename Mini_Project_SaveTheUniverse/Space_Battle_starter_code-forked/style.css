@@ -65,7 +65,7 @@ align-items: center;
     font-size: 1.5em;
     box-shadow: 0px 0px 20px 10px white;
     border-radius: 2%;
-
+    font-size: 1.5vw;
 
 }
 .enemyImage{
@@ -93,7 +93,7 @@ align-items: center;
     font-family: 'Share Tech Mono', monospace;
     font-size: 1.5em;
     box-shadow: 0px 0px 20px 10px white;
-
+    font-size: 1.5vw;
 }
 
 
@@ -105,6 +105,7 @@ align-items: center;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 1.5vw;
     }
 
     
@@ -145,12 +146,17 @@ align-items: center;
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 20px 10px white;
+    box-sizing: border-box;
 }
 #log {
     width: 100%;
     height: 100%;
     font-size: 16px;
     margin: 3px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    /* box-sizing: border-box; */
 }
 
 
@@ -159,13 +165,14 @@ dialog {
     position: static;
     overflow-x: auto;
     overflow-y: auto;
-    inset-block-start: 35%;/*0px;*/
+    inset-block-start: 15%;/*0px;*/
     inset-block-end: 0px;
     max-width: calc(100% - 2em - 6px);
     max-height: calc(100% - 2em - 2px);
     visibility: visible;
     background-color: black;
     color: white;
+    font-size: 1.5vw;
     }
 
     button{
@@ -177,4 +184,5 @@ dialog {
         padding: 2px;
         box-shadow: 0px 0px 20px 10px white;
         border-radius: 1%;
+        font-size: 1.5vw;
     }
