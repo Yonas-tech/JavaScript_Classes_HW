@@ -1,4 +1,5 @@
-// Ship Class
+//  #####################  Ship Class  #####################  
+
 // the Enemy and Player ships share many properties and methods
 // but the Player ship has additional method (retreat)
 
@@ -19,7 +20,6 @@ class Ship {
                 return 1; //hit
             }
             else {
-                // textareaEl.textContent += '\n' + this.name + ': missed the shot.';
                 return 0; //miss
             }
         }
@@ -43,6 +43,7 @@ class PlayerShip extends Ship {
     }
     retreat() {
         // game over
+        window.alert('USS retreated!')
         // ? how do you do it?
         gameOver('USS retreated and lost the Victory.\n Try next time .... ')
 
@@ -50,7 +51,7 @@ class PlayerShip extends Ship {
 }
 
 
-// Ship Factory
+// #####################   Ship Factory    #########################
 
 class ShipFactory {
     constructor() {
@@ -78,45 +79,60 @@ class ShipFactory {
         }
 
         for (let i = 1; i <= count; i++) {
-            let hull = this.randomValGenerator(3, 6);
-            let firePower = this.randomValGenerator(2, 4);
-            let accuracy = this.randomValGenerator(0.6, 0.8, false);
+            let hull = randomValGenerator(3, 6);
+            let firePower = randomValGenerator(2, 4);
+            let accuracy = randomValGenerator(0.6, 0.8, false);
             let name = "EnemyShip#" + (i)
             this.enemyShips.push(new EnemyShip(hull, firePower, accuracy, name))
         }
     }
+}
 
-    // gernerate random numbers between two values; used for enemy ship production 
-    // set round=false, to prevent rounding to nearest integer 
-    randomValGenerator(min, max, round = true) {
-        let val = Math.random() * (max - min) + min;
-        if (round) {
-            if ((val % 1) >= 0.5) {
-                val = Math.ceil(val);
-            }
-            else {
-                val = Math.floor(val);
-            }
+// #####################   #####################   #####################   #####################   #####################  
+
+
+// gernerate random numbers between two values; used for enemy ship production 
+// set round=false, to prevent rounding to nearest integer 
+function randomValGenerator(min, max, round = true) {
+    let val = Math.random() * (max - min) + min;
+    if (round) {
+        if ((val % 1) >= 0.5) {
+            val = Math.ceil(val);
         }
-        return Math.round(val * 10) / 10;
+        else {
+            val = Math.floor(val);
+        }
     }
+    return Math.round(val * 10) / 10;
+}
+
+// ##################### #####################   Instanciate a universal ship factory and produce the ships
+let universalShipFactory;
+let player;
+let enemies
+let currentEnemyShip;
+let currentEnemyShipIndex;
+
+function populatePlayers() {
+    universalShipFactory = new ShipFactory();
+    // generate the player ship
+    universalShipFactory.createPlayerShip();
+    //generate enemy ships (default count=6);
+    universalShipFactory.createEnemyShips(randomValGenerator(6, 15));
+    // console.log(universalShipFactory)
+    player = universalShipFactory.playerShip;
+    enemies = universalShipFactory.enemyShips;
+
+    textareaEl.textContent += "\nTotal Number Of Enemy Ships To Attack: " + enemies.length + "\n";
+    currentEnemyShipIndex = deployEnemyShip();
+    currentEnemyShip = enemies[currentEnemyShipIndex];
+    textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
 }
 
 
-// instanciate a factory and produce the ships
-const universalShipFactory = new ShipFactory();
-// generate the player ship
-universalShipFactory.createPlayerShip();
-//generate enemy ships (default count=6);
-universalShipFactory.createEnemyShips();
 
-// console.log(universalShipFactory)
-let player = universalShipFactory.playerShip;
-let enemies = universalShipFactory.enemyShips;
+// ##################### Get some DOM elements
 
-
-
-// Get DOM elements
 let playerStats = document.querySelector('.playerStats')
 let enemyStats = document.querySelector('.enemyStats')
 
@@ -129,6 +145,9 @@ let messagePEl = document.querySelector('.message')
 dialogEl.addEventListener('click', handleClick);
 
 
+
+// #####################  methods for battleField()  #####################  
+
 // create/update the message and buttons for user interactions
 let yesBtnEl;
 let noBtnEl;
@@ -139,26 +158,23 @@ function askConfirmaiton(message, yesBtnText = 'RETREAT', noBtnText = 'ATTACK') 
     pEl.textContent = message;
     newForm.appendChild(pEl)
 
+    if (noBtnText != null) {
+        noBtnEl = document.createElement('button');
+        noBtnEl.textContent = noBtnText
+        newForm.appendChild(noBtnEl)
+    }
+
     if (yesBtnText != null) {
         yesBtnEl = document.createElement('button');
         yesBtnEl.textContent = yesBtnText;
         newForm.appendChild(yesBtnEl)
     }
-    if (noBtnText != null) {
-    noBtnEl = document.createElement('button');
-    noBtnEl.textContent = noBtnText
-    newForm.appendChild(noBtnEl)
-    }
-
     dialogEl.innerHTML = "";
     dialogEl.appendChild(newForm)
 
 }
 
-
-////////////////////////////////////////// methods for battleField()
-
-//||||||||||||  deployEnemyShip()
+// #####################    deployEnemyShip()
 
 function deployEnemyShip() {
     let enemyShipsCount = enemies.length;
@@ -171,93 +187,113 @@ function deployEnemyShip() {
     }
 }
 
-//||||||||||||  updateStats()
+// #####################   updateStats()
 
-function updateStats(hitOrMiss, attacker, target){
-        if(hitOrMiss == 1){ //hit
-            textareaEl.textContent += '\n' + target.name + ': has been hit!';
-            textareaEl.textContent += '\n' + target.name + ': health status: hull=' + target.hull;
-            console.log('attacker: ');
-            console.log(attacker)
-            console.log('target:');
-            console.log(target)
-            const txtAttacker = " Hull :  " + attacker.hull  +"<br>  FirePower :  " +attacker.firePower  +"<br>    Accuracy :  "+ attacker.accuracy ;
-            const txtTarget = " Hull :  " + target.hull  +"<br>  FirePower :  " +target.firePower  +"<br>    Accuracy :  "+ target.accuracy ;
+function updateStats(hitOrMiss, attacker, target) {
+    if (hitOrMiss == 1) { //hit
+        textareaEl.textContent += '\n' + target.name + ': has been hit!';
+        textareaEl.textContent += '\n' + target.name + ': health status: hull=' + target.hull;
+        console.log('attacker: ');
+        console.log(attacker)
+        console.log('target:');
+        console.log(target)
+        const txtAttacker = " Hull :  " + attacker.hull + "<br>  FirePower :  " + attacker.firePower + "<br>    Accuracy :  " + attacker.accuracy;
+        const txtTarget = " Hull :  " + target.hull + "<br>  FirePower :  " + target.firePower + "<br>    Accuracy :  " + target.accuracy;
 
-            if(attacker.constructor.name == 'PlayerShip'){
-                
-                playerStats.innerHTML = txtAttacker;
-                enemyStats.innerHTML = target.name + "<br>"+txtTarget;
-            }
-            else{
-                playerStats.innerHTML = txtTarget;
-                enemyStats.innerHTML = attacker.name +"<br>"+txtAttacker;
-            }
+        if (attacker.constructor.name == 'PlayerShip') {
 
+            playerStats.innerHTML = txtAttacker;
+            enemyStats.innerHTML = target.name + "<br>" + txtTarget;
         }
-        else if(hitOrMiss == 0) { // miss
-            textareaEl.textContent += '\n' + attacker.name + ': missed the shot.';
-            txt = ``
+        else {
+            playerStats.innerHTML = txtTarget;
+            enemyStats.innerHTML = attacker.name + "<br>" + txtAttacker;
         }
+
+    }
+    else if (hitOrMiss == 0) { // miss
+        textareaEl.textContent += '\n' + attacker.name + ': missed the shot.';
+        txt = ``
+    }
 }
 
-
-//||||||||||||   gameOVER()
+// #####################   gameOVER()
 
 function gameOver(result) {  // this is simple for now
+    textareaEl.textContent += '\n\n###########   GAME OVER  ###########\n'
     textareaEl.textContent += `\n${result}\n`;
-    textareaEl.textContent += '\n' + `Enemy status:`;
-
-    // console.log(enemies)   // will do with loop or conditional
-
+    textareaEl.textContent += '\n' + `Number of enemy ships left: ${enemies.length}`;
     textareaEl.textContent += '\n' + `Player status:`;
-    // console.log(player)
+    textareaEl.textContent += JSON.stringify(player)
+
+
+    let retreatMsg = `GAME OVER! \n ${result}\n`;  //${currentEnemyShip.name} has been destroyed. \n`;
+    askConfirmaiton(retreatMsg, null, 'Restart')
 
     // console.log()
-
-    window.alert('Game Over!')
 }
 
 // console.log(deployEnemyShip())
 
-let currentEnemyShip;
-let currentEnemyShipIndex; // = null
+// let currentEnemyShip;
+// let currentEnemyShipIndex; // = null
 
 
+// #####################  START and RESTART
+function startBattle() {
+    // textareaEl.textContent += "\nTotal Number Of Enemy Ships To Attack: " + enemies.length + "\n";
+
+    let message = "Here they come ...";
+    askConfirmaiton(message, null, noBtnText = 'ATTACK')
+}
 ///////////////////////////////////////// Event Handler ////////////////////////////////////////// 
 
 function handleClick(event) {
 
     let element = event.target;
-    if (element == startBtnEl) {
-        battleField();
+    if (element == startBtnEl) {  // START Button
+        populatePlayers()
+        startBattle()
+
     }
-    else if(element == yesBtnEl){
+    else if (element == yesBtnEl) { //Retreat Button
         player.retreat()
+
     }
-    else if(element == noBtnEl){
+    else if (element == noBtnEl) { // Attack Button  // same as contnue playing
+        // Restart
+        if (element.textContent == 'Restart') {
+            // textareaEl.textContent = '';
+            // populatePlayers()
+            // startBattle()
+            history.go(0);
+        }
+
         noRetreate()
     }
-    
+
     function battleField() {
-        textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
+        // textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
         //condition: to check if there is an already deployed enemy chip
         if (currentEnemyShip == null && enemies.length > 0) {
-            currentEnemyShipIndex = deployEnemyShip();
-            currentEnemyShip = enemies[currentEnemyShipIndex];
-            textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
+            // currentEnemyShipIndex = deployEnemyShip();
+            // currentEnemyShip = enemies[currentEnemyShipIndex];
+            // textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
+            // populatePlayers()
         }
-        // console.log('currentEnemyShip: ' + JSON.stringify(currentEnemyShip))
+
+
+
 
         // PlayerShip attacks:
 
         let hitOrMiss = player.attack(currentEnemyShip);
         updateStats(hitOrMiss, player, currentEnemyShip);
 
-        if(hitOrMiss == 1){ //hit
-            
+        if (hitOrMiss == 1) { //hit
+
         }
-        else if(hitOrMiss == 0) { // miss
+        else if (hitOrMiss == 0) { // miss
 
         }
 
@@ -282,62 +318,41 @@ function handleClick(event) {
             enemies.splice(currentEnemyShipIndex, 1)
             textareaEl.textContent += '\n' + currentEnemyShip.name + ' is destroyed.\n';
 
-            // player now has the option to retreat
-            // if retreated, the battle is disrupted, then call retreat()
-
+            textareaEl.textContent += '\n' + 'Number of enemy ships left: ' + enemies.length + '\n';
 
             let retreatMsg = `Well done! ${currentEnemyShip.name} has been destroyed. \n`;
-            askConfirmaiton(retreatMsg)
+            currentEnemyShip = null;
+            // player now has the option to retreat
+            if (enemies.length == 0) {
 
-            // else continue playing ...
+                gameOver('USS Won :)')
+            }
+            else {
+                askConfirmaiton(retreatMsg)
+            }
 
-            // function noRetreate() {
-            //     if (enemies.length > 0) {
-            //         // reset the currentEnemyShip variable
-            //         currentEnemyShip = null;
-            //         // go back to the bottlefield
-            //         battleField()
-            //     }
-            //     // all Enemy ships have been destroyed 
-            //     else {
-            //         textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
-            //         gameOver('USS Won :)')
-            //     }
-
-            // }
-            // let retreated = confirm(retreatMsg);
-            // if (retreated) {
-            //     player.retreat();
-            // }
-            // else {
-            //     // check if the enemy still have ships
-            //     if (enemies.length > 0) {
-            //         // reset the currentEnemyShip variable
-            //         currentEnemyShip = null;
-            //         // go back to the bottlefield
-            //         battleField()
-            //     }
-            //     // all Enemy ships have been destroyed 
-            //     else {
-            //         textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
-            //         gameOver('USS Won :)')
-            //     }
-            // }
         }
     } // battlefield
 
+
+
     function noRetreate() {
-        if (enemies.length > 0) {
+        // if (enemies.length > 0) {
             // reset the currentEnemyShip variable
-            currentEnemyShip = null;
+            // currentEnemyShip = null;
             // go back to the bottlefield
+            if (currentEnemyShip == null){
+                currentEnemyShipIndex = deployEnemyShip();
+                currentEnemyShip = enemies[currentEnemyShipIndex];
+                textareaEl.textContent += `\n${currentEnemyShip.name}  is deployed. \n`
+            }
             battleField()
-        }
-        // all Enemy ships have been destroyed 
-        else {
-            textareaEl.textContent += '\n' + 'Enemy ships count: ' + enemies.length + '\n';
-            gameOver('USS Won :)')
-        }
+        // }
+        // // all Enemy ships have been destroyed 
+        // else {
+
+        //     gameOver('USS Won :)')
+        // }
     } //noRetreate
 }
 // battleField()

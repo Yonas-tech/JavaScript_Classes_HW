@@ -162,15 +162,19 @@ dialog {
     inset-block-start: 35%;/*0px;*/
     inset-block-end: 0px;
     max-width: calc(100% - 2em - 6px);
-    max-height: calc(100% - 2em - 6px);
+    max-height: calc(100% - 2em - 2px);
     visibility: visible;
     background-color: black;
     color: white;
     }
 
     button{
-        font-size: 1.5em;
+        font-size: 1.2em;
         color: green;
         font-weight: strong;
-        
+        margin-left: 2px;
+        margin-right: 2px;
+        padding: 2px;
+        box-shadow: 0px 0px 20px 10px white;
+        border-radius: 1%;
     }
